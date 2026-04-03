@@ -1,1 +1,104 @@
+DAX Measures — Credit Risk Dashboard
+
+This file documents all the key DAX measures used in my Power BI dashboard.
+
+The goal of these measures is simple:
+- Understand how the loan portfolio is performing
+- Identify where risk is coming from
+- Figure out which segments are actually profitable
+
+Total Applications
+Total Applications = COUNTROWS(Bank_Loan_DATA)
+
+Total Funded
+Total Funded = SUM(Bank_Loan_DATA[loan_amount])
+
+Total Received
+Total Received = SUM(Bank_Loan_DATA[total_payment])
+
+Net Return ($)
+Net Return = [Total Received] - [Total Funded]
+
+Net Return (%)
+Net Return % = DIVIDE([Net Return], [Total Funded], 0)
+
+Bad Loan Rate (%)
+Bad Loan Rate % =
+DIVIDE(
+    CALCULATE(
+        COUNTROWS(Bank_Loan_DATA),
+        Bank_Loan_DATA[loan_status] = "Charged Off"
+    ),
+    [Total Applications],
+    0
+)
+
+Recovery Rate (%)
+Recovery Rate % =
+DIVIDE(
+    CALCULATE(
+        SUM(Bank_Loan_DATA[total_payment]),
+        Bank_Loan_DATA[loan_status] = "Charged Off"
+    ),
+    CALCULATE(
+        SUM(Bank_Loan_DATA[loan_amount]),
+        Bank_Loan_DATA[loan_status] = "Charged Off"
+    ),
+    0
+)
+
+True Economic Return (%)
+True Economic Return % =
+DIVIDE(
+    [Net Return] -
+    CALCULATE(
+        SUM(Bank_Loan_DATA[loan_amount] - Bank_Loan_DATA[total_payment]),
+        Bank_Loan_DATA[loan_status] = "Charged Off"
+    ),
+    [Total Funded],
+    0
+)
+
+Default Rate (%)
+Default Rate % =
+DIVIDE(
+    CALCULATE(
+        COUNTROWS(Bank_Loan_DATA),
+        Bank_Loan_DATA[loan_status] = "Charged Off"
+    ),
+    COUNTROWS(Bank_Loan_DATA),
+    0
+)
+
+LTI (Loan-to-Income Ratio)
+LTI =
+DIVIDE(
+    Bank_Loan_DATA[loan_amount],
+    Bank_Loan_DATA[annual_income],
+    0
+)
+
+LTI Band
+LTI Band =
+SWITCH(
+    TRUE(),
+    [LTI] < 0.2, "Low LTI",
+    [LTI] <= 0.4, "Medium LTI",
+    "High LTI"
+)
+
+Net Return by Segment
+Net Return Segment =
+SUM(Bank_Loan_DATA[total_payment]) - SUM(Bank_Loan_DATA[loan_amount])
+
+Interest Income
+Interest Income =
+SUM(Bank_Loan_DATA[total_payment] - Bank_Loan_DATA[loan_amount])
+
+Charge-Off Loss
+Charge-Off Loss =
+CALCULATE(
+    SUM(Bank_Loan_DATA[loan_amount] - Bank_Loan_DATA[total_payment]),
+    Bank_Loan_DATA[loan_status] = "Charged Off"
+)
 
