@@ -33,15 +33,15 @@ Build an end-to-end credit risk diagnostic that:
 ## Dashboard — Three Pages
 
 ### Page 1: Executive Command Centre
-![Executive Dashboard](05_screenshots/page1_executive_command_centre.png)
+
 *Six KPI cards · Loan status donut chart · Default loss analysis table*
 
 ### Page 2: Risk Diagnostic Engine
-![Risk Dashboard](05_screenshots/page2_risk_diagnostic_engine.png)
+
 *Default rate by purpose, grade, DTI, geography · Employment length myth · Interactive slicers*
 
 ### Page 3: Profitability Lens
-![Profitability Dashboard](05_screenshots/page3_profitability_lens.png)
+
 *Net return by segment · Grade × Purpose heatmap · LTI cliff · Value destroyers*
 
 ---
