@@ -1,4 +1,4 @@
-# credit-risk-portfolio-analysis
+# Credit Risk Portfolio Analysis
 'End-to-end credit risk analysis on $435.7M loan portfolio | SQL + Power BI | 9 differentiated insights | McKinsey-style strategy deck
 Credit Portfolio Intelligence — Strategic Risk & Profitability Analysis
 
