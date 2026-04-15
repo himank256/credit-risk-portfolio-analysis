@@ -1,6 +1,4 @@
-/*
-Purpose: Portfolio Health Overview
-*/
+
 
 SELECT 
     COUNT(*) AS total_applications,
